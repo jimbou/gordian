@@ -53,6 +53,12 @@ test('keeps the static site accessible and progressively enhanced', async () => 
   assert.match(script, /copy-cite/);
 });
 
+test('uses the Gordian mark as the browser tab icon', async () => {
+  const html = await read('website/index.html');
+
+  assert.match(html, /<link rel="icon" type="image\/svg\+xml" href="assets\/gordian-mark\.svg">/);
+});
+
 test('deploys only the website directory with the GitHub Pages Actions workflow', async () => {
   const workflow = await read('.github/workflows/pages.yml');
 
