@@ -59,6 +59,16 @@ test('uses the Gordian mark as the browser tab icon', async () => {
   assert.match(html, /<link rel="icon" type="image\/svg\+xml" href="assets\/gordian-mark\.svg">/);
 });
 
+test('shows the Gordian mark above the research idea', async () => {
+  const [html, css] = await Promise.all([
+    read('website/index.html'),
+    read('website/styles.css'),
+  ]);
+
+  assert.match(html, /<aside class="hero-note"[^>]*>\s*<img class="hero-note-logo" src="assets\/gordian-mark\.svg" alt="">\s*<p class="note-kicker">The Gordian idea<\/p>/);
+  assert.match(css, /\.hero-note-logo\s*\{[^}]*width:\s*108px;[^}]*height:\s*108px;/s);
+});
+
 test('deploys only the website directory with the GitHub Pages Actions workflow', async () => {
   const workflow = await read('.github/workflows/pages.yml');
 
